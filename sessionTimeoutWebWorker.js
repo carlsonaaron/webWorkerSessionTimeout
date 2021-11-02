@@ -15,7 +15,6 @@ onmessage = function (evt) {
         case 'startTimer':
             popupTime = evt.data.popupTime;
             expirationTime = evt.data.expirationTime;
-            console.log({popup: popupTime, expiration: expirationTime});            
             startSessionTimer();
             break;
     }
@@ -34,10 +33,10 @@ onmessage = function (evt) {
                 return;
             }
 
-            let secondsRemainingUntilPopup = parseInt((msUntilPopup / 1000) % 60);                                                        
+            let secondsRemainingUntilPopup = (msUntilPopup / 1000);                                                        
 
             if (secondsRemainingUntilPopup > 0) {                
-                postMessage({ message: 'popupIsHidden' });                
+                postMessage({ message: 'popupIsHidden', secondsRemaining: secondsRemainingUntilPopup });
             } else {                
                 postMessage({ message: 'popupIsVisible' });
                 
